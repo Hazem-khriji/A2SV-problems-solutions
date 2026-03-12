@@ -1,0 +1,13 @@
+class Solution:
+    def matchPlayersAndTrainers(self, players: List[int], trainers: List[int]) -> int:
+        players.sort()
+        trainers.sort()
+        res=0
+        pl,tr=0,0
+        n_pl,n_tr=len(players),len(trainers)
+        while(pl<n_pl and tr<n_tr):
+            if(players[pl]<=trainers[tr]):
+                res+=1
+                pl+=1
+            tr+=1
+        return res
