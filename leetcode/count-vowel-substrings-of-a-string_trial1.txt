@@ -1,0 +1,20 @@
+class Solution:
+    def countVowelSubstrings(self, word: str) -> int:
+        vowels = set('aeiou')
+        last_seen = {}
+        l = 0
+        res = 0
+        
+        for r, c in enumerate(word):
+            
+            if c not in vowels:
+                last_seen.clear()
+                l = r + 1
+                continue
+            
+            last_seen[c] = r
+            
+            if len(last_seen) == 5:
+                res += min(last_seen.values()) - l + 1
+        
+        return res
