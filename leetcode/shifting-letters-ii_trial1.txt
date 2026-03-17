@@ -1,0 +1,23 @@
+class Solution:
+    def shiftingLetters(self, s: str, shifts: List[List[int]]) -> str:
+        alph=list('abcdefghijklmnopqrstuvwxyz')
+        n=len(s)
+        sh=[0]*n
+        res=""
+        for shift in shifts:
+            beg,end,v=shift[0],shift[1],shift[2]
+            if(v==0):
+                v=-1
+            sh[beg]+=v
+            if(end<n-1):
+                sh[end+1]-=v
+        acc=0
+        pref=[]
+        for i in range(n):
+            acc+=sh[i]
+            pref.append(acc)
+        for i in range(n):
+            c = chr((ord(s[i]) - ord('a') + pref[i]) % 26 + ord('a'))
+            res+=c
+        return res
+            
