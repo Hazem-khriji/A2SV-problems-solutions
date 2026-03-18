@@ -1,0 +1,31 @@
+class Solution:
+    def balancedString(self, s: str) -> int:    
+        d=defaultdict(int)
+        n=len(s)
+        c=Counter(s)
+        lim = n//4
+        target={'Q':0,'W':0,'E':0,'R':0}
+        for char in "QWER":
+            if(char in c and c[char]>target[char]):
+                target[char]=c[char]-lim
+        if all(target[x]==0 for x in target):
+            return 0
+
+        l=0
+        res=n
+        for r in range(n):
+            char=s[r]
+            if (char in target) :
+                d[char]+=1
+            while(l<=r and all(d[x] >= target[x] for x in target)):
+                d[s[l]]-=1
+                res=min(res,r-l+1)
+                l+=1
+        return res
+
+
+        
+        return r-l+1
+
+            
+                
