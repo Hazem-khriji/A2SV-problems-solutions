@@ -1,0 +1,32 @@
+class Solution:
+    def subarraysWithKDistinct(self, nums: List[int], k: int) -> int:
+        res = 0
+        l = 0
+        l0 = 0
+        n = len(nums)
+        d = defaultdict(int)
+        d2 = defaultdict(int)
+        for r in range(n):
+            num  = nums[r]
+            d[num]+=1
+            d2[num]+=1
+            while(len(d)>k):
+                d[nums[l]]-=1
+                if(d[nums[l]] == 0):
+                    del d[nums[l]]
+                l+=1
+            while(len(d2)==k):
+                d2[nums[l0]]-=1
+                if(d2[nums[l0]] == 0):
+                    del d2[nums[l0]]
+                l0+=1
+
+            res+=(l0-l)
+
+        return res
+            
+
+
+
+
+        
