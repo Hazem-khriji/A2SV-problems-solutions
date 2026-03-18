@@ -1,0 +1,22 @@
+class Solution:
+    def getAverages(self, nums: List[int], k: int) -> List[int]:
+        if(k==0):
+            return nums
+        res=[-1]*k
+        n=len(nums)
+        if(n<=2*k):
+            return n*[-1]
+        s=sum(nums[:2*k+1])
+        div=2*k+1
+        res.append(s//div)
+        l,r=1,2*k+1
+        while(r<n):
+            s-=nums[l-1]
+            s+=nums[r]
+            res.append(s//div)
+            l+=1
+            r+=1
+        res.extend([-1]*k)
+        return res
+
+        
