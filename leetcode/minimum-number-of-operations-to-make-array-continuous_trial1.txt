@@ -1,0 +1,16 @@
+class Solution:
+    def minOperations(self, nums: List[int]) -> int:
+        n = len(nums)
+        if(n==1):
+            return 0
+        nums=list(set(nums))
+        nums.sort()
+        res = n - 1
+        l = 0
+        for r in range(len(nums)):
+            num = nums[r]
+            mini = num-n+1
+            while(nums[l]<mini):
+                l+=1
+            res = min(res,n-(r-l+1))
+        return res
