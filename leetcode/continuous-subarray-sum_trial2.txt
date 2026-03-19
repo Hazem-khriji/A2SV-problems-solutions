@@ -1,0 +1,28 @@
+class Solution:
+    def checkSubarraySum(self, nums: List[int], k: int) -> bool:
+        n=len(nums)   
+        if(n==1):
+            return False
+        d = {}
+        pre = [nums[0]]
+        d[nums[0]%k] = 0
+        for i in range(1, n):
+            num = pre[-1]+nums[i]
+            pre.append(num)
+            rem = num%k
+            if(rem == 0):
+                return True
+            if(rem not in d):
+                d[rem] = i
+            else:
+                j = d[rem]
+                if (i-j > 1):
+                    return True
+        return False
+
+        
+
+        
+
+
+        
