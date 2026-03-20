@@ -1,0 +1,22 @@
+class Solution:
+    def rotate(self, nums: List[int], k: int) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+        if (n == 1 or k == 0):
+            return None
+        k = k%n
+        cycles = math.gcd(n, k)
+        for start in range(cycles):
+            curr = nums[start]
+            pos = start
+            
+            while True:
+                pos = (pos + k) % n
+                curr, nums[pos] = nums[pos], curr
+                if pos == start:
+                    break
+        
+        
+            
