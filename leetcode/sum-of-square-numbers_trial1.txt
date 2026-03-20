@@ -1,0 +1,14 @@
+class Solution:
+    def judgeSquareSum(self, c: int) -> bool:
+        limit = int(sqrt(c))
+        arr = [i for i in range(limit+1)]
+        l , r = 0 ,limit
+        while(l<=r):
+            a = arr[l]*arr[l]+arr[r]*arr[r]
+            if(a<c):
+                l+=1
+            elif(a>c):
+                r-=1
+            else:
+                return True
+        return False
