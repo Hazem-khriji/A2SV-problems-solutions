@@ -10,3 +10,10 @@ class Solution:
                 r-=1
             maxi =max(maxi,(r-l)*min(height[l],height[r]))
         return maxi 
+                
+                
+
+            
+
+
+                
