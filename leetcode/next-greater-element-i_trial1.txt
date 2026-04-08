@@ -1,0 +1,23 @@
+class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        n = len(nums1)
+        m = len(nums2)
+        res = [-1]*n
+        stack = [nums2[0]] 
+        greater = {}
+        for i in range(1,m):
+            num = nums2[i]
+            if not stack or num <= stack[-1] :
+                stack.append(nums2[i])
+            else:
+                while stack and stack[-1]<num:
+                    if stack[-1] not in greater:
+                        greater[stack[-1]] = num
+                    stack.pop()
+                stack.append(num)
+        for i in range(n):
+            num = nums1[i]
+            if num in greater:
+                res[i] = greater[num]
+
+        return res
