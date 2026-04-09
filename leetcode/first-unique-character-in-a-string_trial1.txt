@@ -1,0 +1,15 @@
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        mp={}
+        for i in range(len(s)):
+            mp[s[i]] = 0
+
+        for i in range(len(s)):
+            mp[s[i]]+=1
+        for key,value in mp.items():
+            if(value==1):
+                for j in range(len(s)):
+                    if(s[j]==key):
+                        return j
+
+        return -1
