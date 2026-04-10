@@ -1,0 +1,17 @@
+class Solution:
+    def nextGreaterElements(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        l = nums+nums
+        res = [-1]*n
+        s = []
+        for i in range(2*n):
+            while(s and  s[-1][1]<l[i]):
+                (a,b) = s.pop()
+                if(res[a%n]==-1):
+                    res[a%n] = l[i]
+            s.append((i,l[i]))
+        return res
+                
+
+
+            
