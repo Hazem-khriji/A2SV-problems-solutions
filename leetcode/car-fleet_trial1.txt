@@ -1,0 +1,18 @@
+class Solution:
+    def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
+        n = len(position)
+        time_needed=[0]*n
+        ps = [(position[i],speed[i]) for i in range(n)]
+        ps.sort()
+        for i in range(n):
+            pos = ps[i][0]
+            sp = ps[i][1]
+            time_needed[i]=(target-pos)/sp
+        st = []
+        for t in time_needed:
+            while(st and t >= st[-1]):
+                st.pop()
+            st.append(t)
+        return len(st)
+
+        
