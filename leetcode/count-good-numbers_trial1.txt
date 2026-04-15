@@ -1,0 +1,20 @@
+class Solution:
+    mod = 10**9 + 7
+    def pow(self,x,p):
+        if(p == 0):
+            return 1
+        if (p == 1):
+            return x
+        if(p%2 == 0):
+            r = self.pow(x,p//2)
+            return (r * r) % self.mod
+        else:
+            r = self.pow(x,p//2)
+            return (x * r * r) % self.mod       
+
+    def countGoodNumbers(self, n: int) -> int:
+        num_even  = (n + 1) // 2
+        num_odd = n // 2
+        return ((self.pow(5,num_even) * self.pow(4,num_odd)) % self.mod)
+
+        
