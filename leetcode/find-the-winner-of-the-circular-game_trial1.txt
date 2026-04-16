@@ -1,0 +1,13 @@
+class Solution:
+    def findTheWinner(self, n: int, k: int) -> int:
+        if(k==1):
+            return n
+        l=[i for i in range(1,n+1)]
+        curr=0
+        for i in range(n-1):
+            index = (curr + k -1)%n
+            l.pop(index)
+            n-=1
+            curr = index % n
+        
+        return l[0]
