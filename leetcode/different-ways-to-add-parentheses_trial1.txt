@@ -1,0 +1,58 @@
+class Solution:
+    def diffWaysToCompute(self, expression: str) -> List[int]:
+        d = {}
+        def f(l,r):
+            bool1 = all(op not in expression[l:r+1] for op in "+*-")
+            if bool1:
+                return [int(expression[l:r+1])]
+            res = []
+            for i in range(l,r):
+                if expression[i]=='+':
+                    if (l,i-1) in d:
+                        op1 = d[(l,i-1)]
+                    else:
+                        op1 = f(l,i-1)
+                        d[(l,i-1)] = op1
+                    if(i+1,r) in d:
+                        op2 = d[(i+1,r)]
+                    else:
+                        op2 = f(i+1,r)
+                        d[(i+1,r)] = op2
+                    for o1 in op1:
+                        for o2 in op2:
+                            res.append(o1+o2)
+                elif expression[i] == '-':
+                    if (l,i-1) in d:
+                        op1 = d[(l,i-1)]
+                    else:
+                        op1 = f(l,i-1)
+                        d[(l,i-1)] = op1
+                    if(i+1,r) in d:
+                        op2 = d[(i+1,r)]
+                    else:
+                        op2 = f(i+1,r)
+                        d[(i+1,r)] = op2
+                    for o1 in op1:
+                        for o2 in op2:
+                            res.append(o1-o2)
+                elif expression[i] == '*':
+                    if (l,i-1) in d:
+                        op1 = d[(l,i-1)]
+                    else:
+                        op1 = f(l,i-1)
+                        d[(l,i-1)] = op1
+                    if(i+1,r) in d:
+                        op2 = d[(i+1,r)]
+                    else:
+                        op2 = f(i+1,r)
+                        d[(i+1,r)] = op2
+                    for o1 in op1:
+                        for o2 in op2:
+                            res.append(o1*o2)
+            return res
+
+        return f(0,len(expression))
+
+
+
+
