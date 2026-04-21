@@ -1,0 +1,20 @@
+class Solution:
+    def shipWithinDays(self, weights: List[int], days: int) -> int:
+        def checker(cap):
+            d , curr_sum = 1 , 0 
+            for w in weights:
+                if curr_sum + w > cap:
+                    d += 1
+                    curr_sum = w
+                else:
+                    curr_sum += w
+            return d <= days
+
+        low , high = max(weights) , sum(weights)
+        while(low <= high):
+            mid = low + (high-low)//2
+            if(checker(mid)):
+                high = mid - 1
+            else:
+                low = mid + 1
+        return low
