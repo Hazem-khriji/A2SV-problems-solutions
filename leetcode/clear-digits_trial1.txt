@@ -1,0 +1,16 @@
+from collections import deque
+class Solution:
+    def clearDigits(self, s: str) -> str:
+        stack = deque()
+        for i in range (len(s)):
+            if(s[i].isnumeric()):
+                if (stack):
+                    stack.pop()
+            else :
+                stack.append(s[i])
+
+        res=""
+        for i in range(len(stack)):
+            res=stack.pop()+res
+
+        return res 
