@@ -1,0 +1,19 @@
+from bisect import bisect_left
+class Solution:
+    def findRightInterval(self, intervals: List[List[int]]) -> List[int]:
+        d={(interval[0],interval[1]):i for i,interval in enumerate(intervals)}
+        inters = sorted(intervals)
+        starts = [interval[0] for interval in inters]
+        n = len(intervals)
+        res = []
+        for interval in intervals:
+            index = bisect_left(starts,interval[1])
+            if index < n :
+                t = inters[index]
+                a = (t[0],t[1])
+                res.append(d[a])
+            else:
+                res.append(-1)
+        return res
+
+
