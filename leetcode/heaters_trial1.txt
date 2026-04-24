@@ -1,0 +1,13 @@
+from bisect import bisect_left
+class Solution:
+    def findRadius(self, houses: List[int], heaters: List[int]) -> int:
+        heaters.sort()
+        mini = 0
+        
+        for house in houses:
+            pos = bisect_left(heaters, house)
+            right = abs(house - heaters[pos]) if pos < len(heaters) else float('inf')
+            left  = abs(house - heaters[pos - 1]) if pos > 0 else float('inf')
+            mini = max(mini, min(left, right))
+        
+        return mini
