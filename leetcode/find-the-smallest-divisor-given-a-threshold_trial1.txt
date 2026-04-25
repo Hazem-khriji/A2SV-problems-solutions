@@ -1,0 +1,15 @@
+import math
+class Solution:
+    def smallestDivisor(self, nums: List[int], threshold: int) -> int:
+        def check(divisor):
+            x = sum([math.ceil(num/divisor) for num in nums])
+            return x <= threshold
+        l , r = 1 , max(nums)
+        while(l <= r):
+            mid = l + (r - l)//2
+            if (check(mid)):
+                r = mid - 1
+            else:
+                l = mid + 1
+        return l
+    
