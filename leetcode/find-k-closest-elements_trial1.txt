@@ -1,0 +1,24 @@
+from bisect import bisect_right
+class Solution:
+    def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
+        n = len(arr)
+        index = bisect_right(arr , x)
+        l , r = index-1,index
+        res_left = []
+        res_right = []
+        for _ in range(k):
+            if(l<0):
+                res_right.append(arr[r])
+                r += 1
+            elif(r > n -1):
+                res_left.append(arr[l])
+                l -= 1
+            else:
+                # bot indexes valid
+                if x - arr[l] <= arr[r] - x:
+                    res_left.append(arr[l])
+                    l -= 1
+                else:
+                    res_right.append(arr[r])  
+                    r += 1
+        return res_left[::-1]+res_right          
